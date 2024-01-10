@@ -1,20 +1,73 @@
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <string.h>
+# include <fcntl.h>
+# include <dirent.h>
+# include <sys/wait.h>
+# include <limits.h>
+# include <errno.h>
+# include <signal.h>
 
-#include "../../includes/minishell.h"
+typedef struct	s_token
+{
+	char			*str;
+	int				type;
+	struct s_token	*prev;
+	struct s_token	*next;
+}				t_token;
 
+
+# define EMPTY 0
+# define CMD 1
+# define ARG 2
+# define TRUNC 3
+# define APPEND 4
+# define INPUT 5
+# define PIPE 6
+# define END 7
+
+
+
+void	ft_skip_space(const char *str, int *i)
+{
+	while ((str[*i] == ' ' || str[*i] == '\t')
+	|| (str[*i] == '\r' || str[*i] == '\v' || str[*i] == '\f'))
+		(*i)++;
+}
+
+
+int		ignore_sep(char *line, int i)
+{
+	if (line[i] && line[i] == '\\' && line[i + 1] && line[i + 1] == ';')
+		return (1);
+	else if (line[i] && line[i] == '\\' && line[i + 1] && line[i + 1] == '|')
+		return (1);
+	else if (line[i] && line[i] == '\\' && line[i + 1] && line[i + 1] == '>')
+		return (1);
+	else if (line[i] && line[i] == '\\' && line[i + 1] && line[i + 1] == '>'
+				&& line[i + 2] && line[i + 2] == '>')
+		return (1);
+	return (0);
+}
+
+
+
+/****************************************************************/
 
 void	type_arg(t_token *token, int separator)
 {
-	if (ft_strcmp(token->str, "") == 0)
+	if (strcmp(token->str, "") == 0)
 		token->type = EMPTY;
-	else if (ft_strcmp(token->str, ">") == 0 && separator == 0)
+	else if (strcmp(token->str, ">") == 0 && separator == 0)
 		token->type = TRUNC;
-	else if (ft_strcmp(token->str, ">>") == 0 && separator == 0)
+	else if (strcmp(token->str, ">>") == 0 && separator == 0)
 		token->type = APPEND;
-	else if (ft_strcmp(token->str, "<") == 0 && separator == 0)
+	else if (strcmp(token->str, "<") == 0 && separator == 0)
 		token->type = INPUT;
-	else if (ft_strcmp(token->str, "|") == 0 && separator == 0)
+	else if (strcmp(token->str, "|") == 0 && separator == 0)
 		token->type = PIPE;
-	else if (ft_strcmp(token->str, ";") == 0 && separator == 0)
+	else if (strcmp(token->str, ";") == 0 && separator == 0)
 		token->type = END;
 	else if (token->prev == NULL || token->prev->type >= TRUNC)
 		token->type = CMD;
@@ -22,43 +75,7 @@ void	type_arg(t_token *token, int separator)
 		token->type = ARG;
 }
 
-void	squish_args(t_mini *mini)
-{
-	t_token	*token;
-	t_token	*prev;
 
-	token = mini->start;
-	while (token)
-	{
-		prev = prev_step(token, NOSKIP);
-		if (is_type(token, ARG) && is_types(prev, "TAI"))
-		{
-			while (is_last_valid_arg(prev) == 0)
-				prev = prev->prev;
-			token->prev->next = token->next;
-			if (token->next)
-				token->next->prev = token->prev;
-			token->prev = prev;
-			if (prev)
-				token->next = prev->next;
-			else
-				token->next = mini->start;
-			if (prev)
-				prev = prev;
-			else
-				prev = token;
-			if (mini->start->prev)
-				prev->next = prev->next;
-			else
-				prev->next = token;
-			if (mini->start->prev)
-				mini->start = mini->start->prev;
-			else
-				mini->start = mini->start;
-		}
-		token = token->next;
-	}
-}
 
 int	next_alloc(char *line, int *i)
 {
@@ -71,7 +88,7 @@ int	next_alloc(char *line, int *i)
 	c = ' ';
 	while (line[*i + j] && (line[*i + j] != ' ' || c != ' '))
 	{
-		if (c = ' ' && (line[*i + j] == '\'' || line[*i + j] == '\"'))
+		if (c == ' ' && (line[*i + j] == '\'' || line[*i + j] == '\"'))
 			c = line[*i + j++];
 		else if (c != ' ' && line[*i + j] == c)
 		{
@@ -147,4 +164,18 @@ t_token	*get_tokens(char *line)
 	while (next && next->prev)
 		next = next->prev;
 	return (next);
+}
+
+
+
+int	main(int argc, char **argv)
+{
+	char	*line = argv[1];
+	t_token	*tokens = get_tokens(line);
+
+	while (tokens)
+	{
+		printf("- %s \n - %d\n\n", tokens->str, tokens->type);
+		tokens = tokens->next;
+	}
 }
