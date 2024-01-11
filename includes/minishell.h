@@ -1,7 +1,7 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-//# include "libft.h"
+# include "libft.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
@@ -84,5 +84,6 @@ typedef struct	s_expansions
 	int				i;
 	int				j;
 }				t_expansions;
+
 
 #endif

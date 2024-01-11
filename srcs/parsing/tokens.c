@@ -22,6 +22,7 @@ void	type_arg(t_token *token, int separator)
 		token->type = ARG;
 }
 
+// Revisar esta funcion
 void	squish_args(t_mini *mini)
 {
 	t_token	*token;

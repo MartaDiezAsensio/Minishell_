@@ -68,6 +68,29 @@ int	is_last_valid_arg(t_token *token)
 
 int	check_line(t_mini *mini, t_token *token)
 {
-	if (is_types(token, "TAI") && 
-	(!token->next || is_types(token->next, "TAIPE")))
+	while (token)
+	{
+		if (is_types(token, "TAI") && 
+			(!token->next || is_types(token->next, "TAIPE")))
+		{
+			ft_putstr_fd("bash: syntax error near unexpected token `", STDERR);
+			if (token->next)
+				ft_putstr_fd(token->next->str, STDERR);
+			else
+				ft_putstr_fd("newline", STDERR);
+			ft_putendl_fd("'", STDERR);
+			mini->ret = 258; //Explain
+			return (0);
+		}
+		if (is_types(token, "PE") &&
+			(!token->prev || !token->next || is_types(token->prev, "TAIPE")))
+		{
+			ft_putstr_fd("bash: syntax error near unexpected token `", STDERR);
+			ft_putstr_fd(token->str, STDERR);
+			ft_putendk_fd("'", STDERR);
+			mini->ret = 258; // Explain
+		}
+		token = token->next;
+	}
+	return (1);
 }
