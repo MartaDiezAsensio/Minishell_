@@ -86,4 +86,16 @@ typedef struct	s_expansions
 }				t_expansions;
 
 
+
+
+/**
+ * @brief SIGNAL
+ */
+
+void			sig_int(int code);
+void			sig_quit(int code);
+void			sig_init(void);
+
+extern t_sig g_sig;
+
 #endif

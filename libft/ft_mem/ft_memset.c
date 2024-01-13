@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_skip_space.c                                    :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cclaude <cclaude@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/05 18:26:24 by cclaude           #+#    #+#             */
-/*   Updated: 2020/02/06 15:38:11 by cclaude          ###   ########.fr       */
+/*   Created: 2019/10/07 17:15:03 by cclaude           #+#    #+#             */
+/*   Updated: 2019/10/09 14:34:09 by cclaude          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_skip_space(const char *str, int *i)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	while ((str[*i] == ' ' || str[*i] == '\t')
-	|| (str[*i] == '\r' || str[*i] == '\v' || str[*i] == '\f'))
-		(*i)++;
+	size_t			i;
+	unsigned char	*p;
+
+	i = 0;
+	p = (unsigned char *)b;
+	while (i < len)
+		p[i++] = c;
+	return (b);
 }

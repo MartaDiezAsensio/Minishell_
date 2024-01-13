@@ -1,20 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_skip_space.c                                    :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cclaude <cclaude@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/05 18:26:24 by cclaude           #+#    #+#             */
-/*   Updated: 2020/02/06 15:38:11 by cclaude          ###   ########.fr       */
+/*   Created: 2019/10/08 13:07:58 by cclaude           #+#    #+#             */
+/*   Updated: 2019/10/16 14:30:43 by cclaude          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_skip_space(const char *str, int *i)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	while ((str[*i] == ' ' || str[*i] == '\t')
-	|| (str[*i] == '\r' || str[*i] == '\v' || str[*i] == '\f'))
-		(*i)++;
+	int		i;
+	int		j;
+	char	*new;
+
+	if (s1 == NULL || s2 == NULL)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (s1[i] != '\0')
+		i++;
+	while (s2[j] != '\0')
+		j++;
+	if (!(new = malloc(sizeof(char) * (i + j + 1))))
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (s1[i] != '\0')
+	{
+		new[i] = s1[i];
+		i++;
+	}
+	while (s2[j] != '\0')
+		new[i++] = s2[j++];
+	new[i] = '\0';
+	return (new);
 }

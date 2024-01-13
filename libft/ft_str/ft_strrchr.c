@@ -1,20 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_skip_space.c                                    :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cclaude <cclaude@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/05 18:26:24 by cclaude           #+#    #+#             */
-/*   Updated: 2020/02/06 15:38:11 by cclaude          ###   ########.fr       */
+/*   Created: 2019/10/07 14:31:56 by cclaude           #+#    #+#             */
+/*   Updated: 2019/10/09 16:55:53 by cclaude          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_skip_space(const char *str, int *i)
+char	*ft_strrchr(const char *s, int c)
 {
-	while ((str[*i] == ' ' || str[*i] == '\t')
-	|| (str[*i] == '\r' || str[*i] == '\v' || str[*i] == '\f'))
-		(*i)++;
+	int		i;
+	int		pos;
+
+	i = 0;
+	pos = -1;
+	while (s[i] != '\0')
+	{
+		if (s[i] == (unsigned char)c)
+			pos = i;
+		i++;
+	}
+	if (c == '\0')
+		return ((char *)(s + i));
+	if (pos == -1)
+		return (NULL);
+	return ((char *)(s + pos));
 }

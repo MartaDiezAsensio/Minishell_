@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_skip_space.c                                    :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cclaude <cclaude@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/05 18:26:24 by cclaude           #+#    #+#             */
-/*   Updated: 2020/02/06 15:38:11 by cclaude          ###   ########.fr       */
+/*   Created: 2019/10/11 10:56:13 by cclaude           #+#    #+#             */
+/*   Updated: 2020/02/06 15:48:39 by cclaude          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-void	ft_skip_space(const char *str, int *i)
-{
-	while ((str[*i] == ' ' || str[*i] == '\t')
-	|| (str[*i] == '\r' || str[*i] == '\v' || str[*i] == '\f'))
-		(*i)++;
-}
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 32
+# endif
+
+int		get_next_line(int fd, char **line);
+char	*error(char *stock);
+int		newline_check(char *stock, int read_size);
+char	*buf_join(char *stock, char *buf);
+char	*stock_trim(char *stock);
+char	*get_line(char *stock);
+#endif

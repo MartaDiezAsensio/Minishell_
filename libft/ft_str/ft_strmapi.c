@@ -1,20 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_skip_space.c                                    :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cclaude <cclaude@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/05 18:26:24 by cclaude           #+#    #+#             */
-/*   Updated: 2020/02/06 15:38:11 by cclaude          ###   ########.fr       */
+/*   Created: 2019/10/09 10:27:56 by cclaude           #+#    #+#             */
+/*   Updated: 2019/10/16 15:59:25 by cclaude          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_skip_space(const char *str, int *i)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	while ((str[*i] == ' ' || str[*i] == '\t')
-	|| (str[*i] == '\r' || str[*i] == '\v' || str[*i] == '\f'))
-		(*i)++;
+	int		i;
+	char	*new;
+
+	i = 0;
+	if (s == NULL || f == NULL)
+		return (NULL);
+	while (s[i] != '\0')
+		i++;
+	if (!(new = malloc(sizeof(char) * i + 1)))
+		return (NULL);
+	i = 0;
+	while (s[i] != '\0')
+	{
+		new[i] = f(i, s[i]);
+		i++;
+	}
+	new[i] = '\0';
+	return (new);
 }

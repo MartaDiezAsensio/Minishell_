@@ -1,20 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_skip_space.c                                    :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cclaude <cclaude@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/05 18:26:24 by cclaude           #+#    #+#             */
-/*   Updated: 2020/02/06 15:38:11 by cclaude          ###   ########.fr       */
+/*   Created: 2019/10/07 15:47:30 by cclaude           #+#    #+#             */
+/*   Updated: 2019/10/09 14:34:39 by cclaude          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_skip_space(const char *str, int *i)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	while ((str[*i] == ' ' || str[*i] == '\t')
-	|| (str[*i] == '\r' || str[*i] == '\v' || str[*i] == '\f'))
-		(*i)++;
+	int	i;
+	int	j;
+
+	i = 0;
+	if (needle[0] == '\0')
+		return ((char *)haystack);
+	while (haystack[i] != '\0' && i < (int)len)
+	{
+		j = 0;
+		while (haystack[i + j] == needle[j] && i + j < (int)len)
+		{
+			if (needle[j + 1] == '\0')
+				return ((char *)(haystack + i));
+			j++;
+		}
+		i++;
+	}
+	return (NULL);
 }

@@ -1,20 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_skip_space.c                                    :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cclaude <cclaude@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/05 18:26:24 by cclaude           #+#    #+#             */
-/*   Updated: 2020/02/06 15:38:11 by cclaude          ###   ########.fr       */
+/*   Created: 2019/10/07 20:11:24 by cclaude           #+#    #+#             */
+/*   Updated: 2019/10/09 14:34:02 by cclaude          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_skip_space(const char *str, int *i)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	while ((str[*i] == ' ' || str[*i] == '\t')
-	|| (str[*i] == '\r' || str[*i] == '\v' || str[*i] == '\f'))
-		(*i)++;
+	size_t			i;
+	unsigned char	*p;
+	unsigned char	*q;
+
+	p = (unsigned char *)s1;
+	q = (unsigned char *)s2;
+	i = 0;
+	while (i < n)
+	{
+		if (p[i] != q[i])
+			return (p[i] - q[i]);
+		i++;
+	}
+	return (0);
 }

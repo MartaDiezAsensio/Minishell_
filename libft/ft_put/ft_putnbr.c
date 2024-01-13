@@ -1,20 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_skip_space.c                                    :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cclaude <cclaude@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/05 18:26:24 by cclaude           #+#    #+#             */
+/*   Created: 2019/10/09 11:17:42 by cclaude           #+#    #+#             */
 /*   Updated: 2020/02/06 15:38:11 by cclaude          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_skip_space(const char *str, int *i)
+void	ft_putnbr(int n)
 {
-	while ((str[*i] == ' ' || str[*i] == '\t')
-	|| (str[*i] == '\r' || str[*i] == '\v' || str[*i] == '\f'))
-		(*i)++;
+	long	nbr;
+	char	c;
+
+	nbr = n;
+	if (nbr < 0)
+	{
+		write(1, "-", 1);
+		nbr = -nbr;
+	}
+	if (nbr / 10 > 0)
+		ft_putnbr(nbr / 10);
+	c = n % 10 + '0';
+	write(1, &c, 1);
 }

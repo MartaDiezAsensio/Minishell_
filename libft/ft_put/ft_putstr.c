@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdiez-as <mdiez-as@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cclaude <cclaude@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/10 18:06:12 by mdiez-as          #+#    #+#             */
-/*   Updated: 2024/01/10 18:06:54 by mdiez-as         ###   ########.fr       */
+/*   Created: 2019/10/09 10:57:06 by cclaude           #+#    #+#             */
+/*   Updated: 2020/02/06 15:38:11 by cclaude          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <fcntl.h>
-# include <string.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <stdarg.h>
+void	ft_putstr(char *s)
+{
+	int	i;
 
-
-
-void	ft_skip_space(const char *str, int *i);
-
-#endif
+	i = 0;
+	if (s == NULL)
+		return ;
+	while (s[i] != '\0')
+	{
+		write(1, &s[i], 1);
+		i++;
+	}
+}
