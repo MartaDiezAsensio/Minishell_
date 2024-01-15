@@ -1,6 +1,6 @@
-#Minishell
+# Minishell
 
-##Functions required
+## Functions required
 
 **readline**
 To compile the program with the library: 
@@ -108,7 +108,7 @@ int main() {
 **tgetflag, tgetnum, tgetstr, tgoto, tputs**
 
 
-##Shell Checklist
+## Shell Checklist
 
 []. Display prompt
 
