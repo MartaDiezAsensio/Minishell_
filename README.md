@@ -108,6 +108,9 @@ int main() {
 **tgetflag, tgetnum, tgetstr, tgoto, tputs**
 
 
+
+
+
 ## Shell Checklist
 
 []. Display prompt
@@ -125,10 +128,14 @@ int main() {
 [].  Handle " which will prevent the shell from interpreting the metacharacters in the quoted sequence except for $
 
 [].  Implement redirections
-    []. < redirects inputs
-    []. > redirects output
-    []. << given a delimiter, then heredoc until the delimiter is seen
-    []. >> redirect output in append mode
+
+[]. < redirects inputs
+
+[]. > redirects output
+
+[]. << given a delimiter, then heredoc until the delimiter is seen
+
+[]. >> redirect output in append mode
 
 []. Implement pipes
 
