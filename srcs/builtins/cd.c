@@ -89,7 +89,7 @@ static int	go_to_path(int option, t_env *env)
 	return (ret);
 }
 
-/*int	ft_cd(char **arg, t_env *env)
+int	ft_cd(char **args, t_env *env)
 {
 	int	cd_ret;
 
@@ -100,10 +100,15 @@ static int	go_to_path(int option, t_env *env)
 	else
 	{
 		update_oldpwd(env);
-		cd_ret = chdir
+		cd_ret = chdir(args[1]);
+		if (cd_ret < 0)
+			cd_ret *= -1;
+		if (cd_ret != 0)
+			print_error(args);
 	}
+	return (cd_ret);
 }
-*/
+
 
 
 
