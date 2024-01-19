@@ -108,10 +108,3 @@ int	ft_cd(char **args, t_env *env)
 	}
 	return (cd_ret);
 }
-
-
-
-
-
-
-

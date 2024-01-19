@@ -21,7 +21,6 @@ char	*space_alloc(char *line)
 	return (new);
 }
 
-
 char	*space_line(char *line)
 {
 	char	*new;
