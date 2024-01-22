@@ -4,7 +4,7 @@
 
 int	is_sep(char *line, int i)
 {
-	if (i > 0 && line[i - 1] == '\\' && ft_strhr("<>|;", line[i]))
+	if (i > 0 && line[i - 1] == '\\' && ft_strchr("<>|;", line[i]))
 		return (0);
 	else if (ft_strchr("<>|;", line[i]) && quotes(line, i) == 0)
 		return (1);
@@ -87,7 +87,7 @@ int	check_line(t_mini *mini, t_token *token)
 		{
 			ft_putstr_fd("bash: syntax error near unexpected token `", STDERR);
 			ft_putstr_fd(token->str, STDERR);
-			ft_putendk_fd("'", STDERR);
+			ft_putendl_fd("'", STDERR);
 			mini->ret = 258; // Explain
 		}
 		token = token->next;

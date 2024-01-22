@@ -1,6 +1,6 @@
 #include "../../includes/minishell.h"
 
-t_token	*nex_sep(t_token *token, int skip)
+t_token	*next_sep(t_token *token, int skip)
 {
 	if (token && skip)
 		token = token->next;

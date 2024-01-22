@@ -31,7 +31,7 @@ void	squish_args(t_mini *mini)
 	token = mini->start;
 	while (token)
 	{
-		prev = prev_step(token, NOSKIP);
+		prev = prev_sep(token, NOSKIP);
 		if (is_type(token, ARG) && is_types(prev, "TAI"))
 		{
 			while (is_last_valid_arg(prev) == 0)
@@ -45,7 +45,7 @@ void	squish_args(t_mini *mini)
 			else
 				token->next = mini->start;
 			if (prev)
-				prev = prev;
+				continue ;
 			else
 				prev = token;
 			if (mini->start->prev)
@@ -72,7 +72,7 @@ int	next_alloc(char *line, int *i)
 	c = ' ';
 	while (line[*i + j] && (line[*i + j] != ' ' || c != ' '))
 	{
-		if (c = ' ' && (line[*i + j] == '\'' || line[*i + j] == '\"'))
+		if (c == ' ' && (line[*i + j] == '\'' || line[*i + j] == '\"'))
 			c = line[*i + j++];
 		else if (c != ' ' && line[*i + j] == c)
 		{

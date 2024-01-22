@@ -11,7 +11,7 @@ int	ret_size(int ret)
 	return (ret_len);
 }
 
-int	fet_var_len(const char *arg, int pos, t_env *env, int ret)
+int	get_var_len(const char *arg, int pos, t_env *env, int ret)
 {
 	char	var_name[BUFF_SIZE];
 	char	*var_value;

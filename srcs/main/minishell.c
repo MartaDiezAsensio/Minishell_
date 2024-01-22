@@ -31,7 +31,7 @@ void	minishell(t_mini *mini)
 	t_token	*token;
 	int		status;
 
-	token = token_run(mini->start, NOSKIP);
+	token = next_run(mini->start, NOSKIP);
 	if (is_types(mini->start, "TAI"))
 		token = mini->start->next;
 	while (mini->exit == 0 && token)

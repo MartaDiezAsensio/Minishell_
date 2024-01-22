@@ -45,7 +45,7 @@ void	print_sorted_env(t_env *env)
 	str_env = env_to_str(env);
 	tab = ft_split(str_env, '\n');
 	ft_memdel(str_env);
-	sort_env(tab, str_env_len(tab));
+	sort_env(tab, dtr_env_len(tab));
 	i = 0;
 	while (tab[i])
 	{

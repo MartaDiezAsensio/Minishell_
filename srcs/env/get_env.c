@@ -4,10 +4,10 @@ int	is_env_char(int c)
 {
 	if (ft_isalnum(c) == 1 || c == '_')
 		return (1);
-	reuturn (0);
+	return (0);
 }
 
-int	is_valied_env(const char *env)
+int	is_valid_env(const char *env)
 {
 	int	i;
 
