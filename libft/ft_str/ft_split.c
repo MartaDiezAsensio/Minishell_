@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cclaude <cclaude@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mgaspar- <mgaspar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 17:46:22 by cclaude           #+#    #+#             */
-/*   Updated: 2019/10/16 14:40:05 by cclaude          ###   ########.fr       */
+/*   Updated: 2024/01/25 18:28:18 by mgaspar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,21 @@ static int	letter_count(char const *s, char c, int index)
 	return (count);
 }
 
-char		**ft_split(char const *s, char c)
+char	**loops(char **tab, char const *s, char c)
 {
-	char	**tab;
 	int		i;
 	int		j;
 	int		k;
 
 	i = 0;
 	k = 0;
-	if (!s || !c || !(tab = malloc(sizeof(char *) * (word_count(s, c) + 1))))
-		return (NULL);
 	while (s[k] == c)
 		k++;
 	while (s[k] != '\0')
 	{
 		j = 0;
-		if (!(tab[i] = malloc(sizeof(char) * letter_count(s, c, k) + 1)))
+		tab[i] = malloc(sizeof(char) * letter_count(s, c, k) + 1);
+		if (!(tab[i]))
 			return (NULL);
 		while (s[k] != c && s[k] != '\0')
 			tab[i][j++] = s[k++];
@@ -72,4 +70,14 @@ char		**ft_split(char const *s, char c)
 	}
 	tab[i] = NULL;
 	return (tab);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**tab;
+
+	tab = malloc(sizeof(char *) * (word_count(s, c) + 1));
+	if (!s || !c || !(tab))
+		return (NULL);
+	return (loops(tab, s, c));
 }

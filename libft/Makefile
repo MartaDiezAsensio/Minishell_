@@ -14,7 +14,7 @@ FTLST = add_back add_front clear delone iter last map new size
 
 FTMATH = abs nbrlen hexlen baselen power
 
-FTMEM = bzero calloc memccpy memchr memcmp memcpy memdel memmove memset
+FTMEM = bzero calloc memccpy memchr memcmp memcpy memdel memset
 
 FTPUT = char endl nbr str char_fd endl_fd nbr_fd str_fd
 
@@ -24,9 +24,7 @@ FTSUB = ft_str/ft_substr ft_str/ft_split
 
 FTTO = tolower toupper atoi itoa
 
-FTEX = gnl/get_next_line printf/ft_printf
-
-FTPRF = flagger branch_csp branch_duxo put_c put_s put_du put_o put_x put_p
+FTEX = gnl/get_next_line
 
 SRC = $(addsuffix .c, $(addprefix ft_is/ft_is, $(FTIS))) \
 	$(addsuffix .c, $(addprefix ft_lst/ft_lst, $(FTLST))) \

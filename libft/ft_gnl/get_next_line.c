@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macrespo <macrespo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgaspar- <mgaspar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 16:53:10 by cclaude           #+#    #+#             */
-/*   Updated: 2020/08/24 20:48:05 by macrespo         ###   ########.fr       */
+/*   Updated: 2024/01/25 18:30:06 by mgaspar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
-int		newline_check(char *stock, int read_size)
+int	newline_check(char *stock, int read_size)
 {
 	int	i;
 
@@ -42,7 +43,8 @@ char	*buf_join(char *stock, char *buf)
 		i++;
 	while (buf[j] != '\0')
 		j++;
-	if (!(new = malloc(sizeof(char) * (i + j + 1))))
+	new = malloc(sizeof(char) * (i + j + 1));
+	if (!new)
 		return (ft_memdel(stock));
 	i = 0;
 	j = 0;
@@ -69,7 +71,8 @@ char	*stock_trim(char *stock)
 		i++;
 	while (stock[i++] != '\0')
 		j++;
-	if (!(trimmed = malloc(sizeof(char) * j + 1)))
+	trimmed = malloc(sizeof(char) * j + 1);
+	if (!trimmed)
 		return (ft_memdel(stock));
 	i = 0;
 	j = 0;
@@ -93,7 +96,8 @@ char	*get_line(char *stock)
 	i = 0;
 	while (stock[i] != '\n' && stock[i] != '\0')
 		i++;
-	if (!(line = malloc(sizeof(char) * i + 1)))
+	line = malloc(sizeof(char) * i + 1);
+	if (!line)
 		return (ft_memdel(stock));
 	i = 0;
 	while (stock[i] != '\n' && stock[i] != '\0')
@@ -105,7 +109,7 @@ char	*get_line(char *stock)
 	return (line);
 }
 
-int		get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	int			read_len;
 	char		buf[BUFFER_SIZE + 1];
@@ -116,19 +120,28 @@ int		get_next_line(int fd, char **line)
 	read_len = 1;
 	while (!(newline_check(stock, read_len)))
 	{
-		if ((read_len = read(fd, buf, BUFFER_SIZE)) == -1)
+		read_len = read(fd, buf, BUFFER_SIZE);
+		if (read_len == -1)
 			return (-1);
 		buf[read_len] = '\0';
-		(read_len == 0 || buf[read_len - 1] != '\n') ? ft_printf("  \b\b") : 0;
-		if ((stock = buf_join(stock, buf)) == NULL)
+		if (read_len == 0 || buf[read_len - 1] != '\n')
+			printf("  \b\b");
+		stock = buf_join(stock, buf);
+		if (stock == NULL)
 			return (-1);
 	}
-	if (newline_check(stock, read_len) == 2 && (*line = stock))
+	*line = stock;
+	if (newline_check(stock, read_len) == 2 && (*line))
 		return (-2);
-	if ((*line = get_line(stock)) == NULL)
+	*line = get_line(stock);
+	if (*line == NULL)
 		return (-1);
-	if ((stock = stock_trim(stock)))
+	stock = stock_trim(stock);
+	if ((stock))
 		return (-1);
 	ft_memdel(stock);
-	return (read_len != 0 ? 1 : 0);
+	if (read_len != 0)
+		return (1);
+	else
+		return (0);
 }
