@@ -6,7 +6,7 @@
 /*   By: mdiez-as <mdiez-as@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:54:14 by mdiez-as          #+#    #+#             */
-/*   Updated: 2024/01/25 19:56:30 by mdiez-as         ###   ########.fr       */
+/*   Updated: 2024/01/25 20:00:15 by mdiez-as         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,10 @@ size_t	size_env(t_env *lst)
 	return (lst_len);
 }
 
-char	*env_to_str(t_env *lst)
+static void	copy_env_values(char *env, t_env *lst, int *i)
 {
-	char	*env;
-	int		i;
-	int		j;
+	int	j;
 
-	i = 0;
-	env = malloc(sizeof(char) * size_env(lst) + 1);
-	if (!env)
-		return (NULL);
 	while (lst && lst->next != NULL)
 	{
 		if (lst->value != NULL)
@@ -46,15 +40,27 @@ char	*env_to_str(t_env *lst)
 			j = 0;
 			while (lst->value[j])
 			{
-				env[i] = lst->value[j];
-				i++;
+				env[*i] = lst->value[j];
+				(*i)++;
 				j++;
 			}
 		}
 		if (lst->next->next != NULL)
-			env[i++] = '\n';
+			env[(*i)++] = '\n';
 		lst = lst->next;
 	}
+}
+
+char	*env_to_str(t_env *lst)
+{
+	char	*env;
+	int		i;
+
+	i = 0;
+	env = malloc(sizeof(char) * size_env(lst) + 1);
+	if (!env)
+		return (NULL);
+	copy_env_values(env, lst, &i);
 	env[i] = '\0';
 	return (env);
 }
