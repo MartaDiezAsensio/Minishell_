@@ -70,7 +70,6 @@ char	*path_join(const char *s1, const char *s2)
 
 char	*check_dir(char *bin, char *command)
 {
-	//DIR = directory stream
 	DIR				*folder;
 	struct dirent	*item;
 	char			*path;
@@ -116,4 +115,3 @@ int	exec_bin(char **args, t_env *env, t_mini *mini)
 	ft_memdel(path);
 	return (ret);
 }
-

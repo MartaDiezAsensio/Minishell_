@@ -1,6 +1,5 @@
 #include "../../includes/minishell.h"
 
-
 char	*space_alloc(char *line)
 {
 	char	*new;
@@ -50,10 +49,8 @@ char	*space_line(char *line)
 	return (new);
 }
 
-
 int	quote_check(t_mini *mini, char **line)
 {
-	// number explanation
 	if (quotes(*line, 2147483647))
 	{
 		ft_putendl_fd("minishell: syntax error with open quotes", STDERR);

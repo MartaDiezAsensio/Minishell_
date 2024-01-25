@@ -43,7 +43,6 @@ static char	*get_env_path(t_env *env, const char *var, size_t len)
 	return  (NULL);
 }
 
-
 static int	update_oldpwd(t_env *env)
 {
 	char	cwd[PATH_MAX];
@@ -59,7 +58,6 @@ static int	update_oldpwd(t_env *env)
 	ft_memdel(oldpwd);
 	return (SUCCESS);
 }
-
 
 static int	go_to_path(int option, t_env *env)
 {

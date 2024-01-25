@@ -72,7 +72,6 @@ int	env_init(t_mini *mini, char **env_array)
 	return (0);
 }
 
-
 int	secret_env_init(t_mini *mini, char **env_array)
 {
 	t_env	*env;

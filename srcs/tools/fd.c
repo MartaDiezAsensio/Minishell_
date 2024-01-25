@@ -1,7 +1,5 @@
 #include "../../includes/minishell.h"
 
-// Dup and dup2 system calls
-
 void	ft_close(int fd)
 {
 	if (fd > 0)

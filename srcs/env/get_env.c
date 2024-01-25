@@ -34,7 +34,7 @@ int	env_value_len(const char *env)
 	i = 0;
 	while (env[i] && env[i] != '=')
 		i++;
-	i += 1; // i++;
+	i += 1;
 	while (env[i])
 	{
 		i++;
@@ -57,7 +57,7 @@ char	*env_value(char *env)
 		return (NULL);
 	while (env[i] && env[i] != '=')
 		i++;
-	i += 1; // i++;
+	i += 1;
 	j = 0;
 	while (env[i])
 		env_value[j++] = env[i++];

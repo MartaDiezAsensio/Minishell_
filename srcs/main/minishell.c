@@ -44,7 +44,7 @@ void	minishell(t_mini *mini)
 		close_fds(mini);
 		reset_fds(mini);
 		waitpid(-1, &status, 0);
-		status = WEXITSTATUS(status); //function exp
+		status = WEXITSTATUS(status);
 		if (mini->last == 0)
 			mini->ret = status;
 		if (mini->parent == 0)

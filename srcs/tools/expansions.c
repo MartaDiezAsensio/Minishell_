@@ -64,7 +64,6 @@ int	arg_alloc_len(const char *arg, t_env *env, int ret)
 	return (size);
 }
 
-
 char	*get_var_value(const char *arg, int pos, t_env *env, int ret)
 {
 	char	var_name[BUFF_SIZE];

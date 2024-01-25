@@ -1,7 +1,6 @@
 
 #include "../../includes/minishell.h"
 
-
 int	is_sep(char *line, int i)
 {
 	if (i > 0 && line[i - 1] == '\\' && ft_strchr("<>|;", line[i]))
@@ -11,7 +10,6 @@ int	is_sep(char *line, int i)
 	else
 		return (0);
 }
-
 
 int	ignore_sep(char *line, int i)
 {
