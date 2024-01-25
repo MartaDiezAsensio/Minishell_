@@ -6,7 +6,7 @@
 /*   By: mgaspar- <mgaspar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 16:53:10 by cclaude           #+#    #+#             */
-/*   Updated: 2024/01/25 18:30:06 by mgaspar-         ###   ########.fr       */
+/*   Updated: 2024/01/25 18:56:51 by mgaspar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,24 +112,11 @@ char	*get_line(char *stock)
 int	get_next_line(int fd, char **line)
 {
 	int			read_len;
-	char		buf[BUFFER_SIZE + 1];
 	static char	*stock = NULL;
 
-	if (line == NULL || fd < 0 || BUFFER_SIZE < 1 || (read(fd, buf, 0)) < 0)
+	if (line == NULL || fd < 0 || BUFFER_SIZE < 1 || (read(fd, NULL, 0)) < 0)
 		return (-1);
-	read_len = 1;
-	while (!(newline_check(stock, read_len)))
-	{
-		read_len = read(fd, buf, BUFFER_SIZE);
-		if (read_len == -1)
-			return (-1);
-		buf[read_len] = '\0';
-		if (read_len == 0 || buf[read_len - 1] != '\n')
-			printf("  \b\b");
-		stock = buf_join(stock, buf);
-		if (stock == NULL)
-			return (-1);
-	}
+	read_len = read_and_append(fd, &stock);
 	*line = stock;
 	if (newline_check(stock, read_len) == 2 && (*line))
 		return (-2);
@@ -137,7 +124,7 @@ int	get_next_line(int fd, char **line)
 	if (*line == NULL)
 		return (-1);
 	stock = stock_trim(stock);
-	if ((stock))
+	if (stock != NULL)
 		return (-1);
 	ft_memdel(stock);
 	if (read_len != 0)

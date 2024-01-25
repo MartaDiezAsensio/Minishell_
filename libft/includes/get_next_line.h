@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cclaude <cclaude@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mgaspar- <mgaspar-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 10:56:13 by cclaude           #+#    #+#             */
-/*   Updated: 2020/02/06 15:48:39 by cclaude          ###   ########.fr       */
+/*   Updated: 2024/01/25 18:50:56 by mgaspar-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # endif
 
 int		get_next_line(int fd, char **line);
+int		read_and_append(int fd, char **stock);
 char	*error(char *stock);
 int		newline_check(char *stock, int read_size);
 char	*buf_join(char *stock, char *buf);

@@ -24,7 +24,7 @@ FTSUB = ft_str/ft_substr ft_str/ft_split
 
 FTTO = tolower toupper atoi itoa
 
-FTEX = gnl/get_next_line
+FTEX = gnl/get_next_line gnl/auxiliar
 
 SRC = $(addsuffix .c, $(addprefix ft_is/ft_is, $(FTIS))) \
 	$(addsuffix .c, $(addprefix ft_lst/ft_lst, $(FTLST))) \
