@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdiez-as <mdiez-as@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/25 19:24:31 by mdiez-as          #+#    #+#             */
+/*   Updated: 2024/01/25 19:50:34 by mdiez-as         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 static int	print_error(int error, const char *arg)
@@ -74,34 +86,26 @@ int	is_in_env(t_env *env, char *args)
 	return (SUCCESS);
 }
 
-int	ft_export(char **args, t_env *env, t_env *secret)
+int	handle_export_with_args(char **args, t_env *env, t_env *secret)
 {
 	int	new_env;
 	int	error_ret;
 
 	new_env = 0;
-	if (!args[1])
-	{
-		print_sorted_env(secret);
-		return (SUCCESS);
-	}
+	error_ret = is_valid_env(args[1]);
+	if (args[1][0] == '=')
+		error_ret = -3;
+	if (error_ret <= 0)
+		return (print_error(error_ret, args[1]));
+	if (error_ret == 2)
+		new_env = 1;
 	else
+		new_env = is_in_env(env, args[1]);
+	if (new_env == 0)
 	{
-		error_ret = is_valid_env(args[1]);
-		if (args[1][0] == '=')
-			error_ret = -3;
-		if (error_ret <= 0)
-			return (print_error(error_ret, args[1]));
-		if (error_ret == 2)
-			new_env = 1;
-		else
-			new_env = is_in_env(env, args[1]);
-		if (new_env == 0)
-		{
-			if (error_ret == 1)
-				env_add(args[1], env);
-			env_add(args[1], secret);
-		}
+		if (error_ret == 1)
+			env_add(args[1], env);
+		env_add(args[1], secret);
 	}
 	return (SUCCESS);
 }

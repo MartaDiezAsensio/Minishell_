@@ -18,7 +18,7 @@ MAIN = minishell redir signal
 
 PARSING = line tokens expansions
 
-TOOLS = fd free token type expansions parsing
+TOOLS = fd free token type expansions parsing builtins_aux
 
 SRC = $(addsuffix .c, $(addprefix srcs/builtins/, $(BUILTINS))) \
 	  $(addsuffix .c, $(addprefix srcs/env/, $(ENV))) \

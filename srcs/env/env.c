@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdiez-as <mdiez-as@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/25 17:54:14 by mdiez-as          #+#    #+#             */
+/*   Updated: 2024/01/25 19:56:30 by mdiez-as         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 size_t	size_env(t_env *lst)
@@ -53,7 +65,8 @@ int	env_init(t_mini *mini, char **env_array)
 	t_env	*new;
 	int		i;
 
-	if (!(env = malloc(sizeof(t_env))))
+	env = malloc(sizeof(t_env));
+	if (!env)
 		return (1);
 	env->value = ft_strdup(env_array[0]);
 	env->next = NULL;
@@ -61,7 +74,8 @@ int	env_init(t_mini *mini, char **env_array)
 	i = 1;
 	while (env_array && env_array[0] && env_array[i])
 	{
-		if (!(new = malloc(sizeof(t_env))))
+		new = malloc(sizeof(t_env));
+		if (!new)
 			return (1);
 		new->value = ft_strdup(env_array[i]);
 		new->next = NULL;
@@ -78,7 +92,8 @@ int	secret_env_init(t_mini *mini, char **env_array)
 	t_env	*new;
 	int		i;
 
-	if (!(env = malloc(sizeof(t_env))))
+	env = malloc(sizeof(t_env));
+	if (!env)
 		return (1);
 	env->value = ft_strdup(env_array[0]);
 	env->next = NULL;
@@ -86,7 +101,8 @@ int	secret_env_init(t_mini *mini, char **env_array)
 	i = 1;
 	while (env_array && env_array[0] && env_array[i])
 	{
-		if (!(new = malloc(sizeof(t_env))))
+		new = malloc(sizeof(t_env));
+		if (!new)
 			return (1);
 		new->value = ft_strdup(env_array[i]);
 		new->next = NULL;

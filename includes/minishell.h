@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgaspar- <mgaspar-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mdiez-as <mdiez-as@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 17:32:27 by mgaspar-          #+#    #+#             */
-/*   Updated: 2024/01/25 17:41:18 by mgaspar-         ###   ########.fr       */
+/*   Updated: 2024/01/25 19:38:43 by mdiez-as         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,5 +207,10 @@ void			sig_quit(int code);
 void			sig_init(void);
 
 extern t_sig	g_sig;
+
+
+char			*copy_value_from_env(const char *env_value, size_t len);
+int				handle_export_no_args(t_env *secret);
+int				handle_export_with_args(char **args, t_env *env, t_env *secret);
 
 #endif

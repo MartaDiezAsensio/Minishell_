@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdiez-as <mdiez-as@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/25 19:24:08 by mdiez-as          #+#    #+#             */
+/*   Updated: 2024/01/25 19:36:14 by mdiez-as         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 static void	print_error(char **args)
@@ -16,31 +28,17 @@ static void	print_error(char **args)
 static char	*get_env_path(t_env *env, const char *var, size_t len)
 {
 	char	*oldpwd;
-	int		i;
-	int		j;
-	int		s_alloc;
 
 	while (env && env->next != NULL)
 	{
 		if (ft_strncmp(env->value, var, len) == 0)
 		{
-			s_alloc = ft_strlen(env->value) - len;
-			oldpwd = malloc(sizeof(char) * s_alloc + 1);
-			if (!oldpwd)
-				return (NULL);
-			i = 0;
-			j = 0;
-			while (env->value[i++])
-			{
-				if (i > (int)len)
-					oldpwd[j++] = env->value[i];
-			}
-			oldpwd[j] = '\0';
-			return(oldpwd);
+			oldpwd = copy_value_from_env(env->value, len);
+			return (oldpwd);
 		}
 		env = env->next;
 	}
-	return  (NULL);
+	return (NULL);
 }
 
 static int	update_oldpwd(t_env *env)

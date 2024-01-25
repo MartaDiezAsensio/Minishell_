@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unset.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mdiez-as <mdiez-as@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/25 19:24:39 by mdiez-as          #+#    #+#             */
+/*   Updated: 2024/01/25 19:30:15 by mdiez-as         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
-static size_t	env_size(char * env)
+static size_t	env_size(char *env)
 {
 	size_t	i;
 
@@ -36,7 +48,7 @@ int	ft_unset(char **a, t_mini *mini)
 		if (env->next)
 			mini->env = env->next;
 		free_node(mini, env);
-		return (SUCCESS); 
+		return (SUCCESS);
 	}
 	while (env && env->next)
 	{
