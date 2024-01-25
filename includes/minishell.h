@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mgaspar- <mgaspar-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/25 17:32:27 by mgaspar-          #+#    #+#             */
+/*   Updated: 2024/01/25 17:41:18 by mgaspar-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -36,7 +48,7 @@
 # define IS_DIRECTORY 126
 # define UNKNOWN_COMMAND 127
 
-typedef struct	s_token
+typedef struct s_token
 {
 	char			*str;
 	int				type;
@@ -44,13 +56,13 @@ typedef struct	s_token
 	struct s_token	*next;
 }				t_token;
 
-typedef struct	s_env
+typedef struct s_env
 {
 	char			*value;
 	struct s_env	*next;
 }				t_env;
 
-typedef struct	s_mini
+typedef struct s_mini
 {
 	t_token			*start;
 	t_env			*env;
@@ -70,7 +82,7 @@ typedef struct	s_mini
 	int				no_exec;
 }				t_mini;
 
-typedef struct	s_sig
+typedef struct s_sig
 {
 	int				sigint;
 	int				sigquit;
@@ -78,20 +90,15 @@ typedef struct	s_sig
 	pid_t			pid;
 }				t_sig;
 
-typedef struct	s_expansions
+typedef struct s_expansions
 {
 	char			*new_arg;
 	int				i;
 	int				j;
 }				t_expansions;
-
-
-
-
 /**
  * @brief SIGNAL
  */
-
 void			sig_int(int code);
 void			sig_quit(int code);
 void			sig_init(void);
@@ -199,7 +206,6 @@ void			sig_int(int code);
 void			sig_quit(int code);
 void			sig_init(void);
 
-
-extern t_sig g_sig;
+extern t_sig	g_sig;
 
 #endif
